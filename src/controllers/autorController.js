@@ -1,11 +1,12 @@
-import livro from "../model/Livro.js"
+import autor from "../model/Autor.js";
 
-class LivroController {
 
-    static async listarLivros(req, res) {
+class AutorController {
+
+    static async listarAutores(req, res) {
      try {
-       const listaLivros = await livro.find({});
-       res.status(200).json(listaLivros);
+       const listaAutores = await autor.find({});
+       res.status(200).json(listaAutores);
      } catch (erro) {
        res
          .status(500)
@@ -13,10 +14,10 @@ class LivroController {
      }
    }
 
-   static async cadastrarLivro(req, res) {
+   static async cadastrarAutor(req, res) {
     try{
-        const novoLivro = await livro.create(req.body);
-        res.status(201).json({message: "criado com sucesso", livro: novoLivro});
+        const novoAutor = await autor.create(req.body);
+        res.status(201).json({message: "criado com sucesso", autor: novoLivro});
 
     } catch (error) {
         res
@@ -28,8 +29,8 @@ class LivroController {
    static async listarLivroPorId(req, res) {
     try {
         const id = req.params.id;
-      const livro = await livro.findById(id);
-      res.status(200).json(livro);
+      const autor = await autor.findById(id);
+      res.status(200).json(autor);
     } catch (erro) {
       res
         .status(500)
@@ -40,8 +41,8 @@ class LivroController {
   static async atualizarLivro(req, res) {
     try {
         const id = req.params.id;
-        await livro.findByIdAndUpdate(id, req.body);
-      res.status(200).json({message: "livro atualizado"});
+        await autor.findByIdAndUpdate(id, req.body);
+      res.status(200).json({message: "autor atualizado"});
     } catch (erro) {
       res
         .status(500)
@@ -52,8 +53,8 @@ class LivroController {
   static async excluirLivro(req, res) {
     try {
         const id = req.params.id;
-        await livro.findByIdAndDelete(id);
-      res.status(200).json({message: "livro excluido"});
+        await autor.findByIdAndDelete(id);
+      res.status(200).json({message: "autor excluido"});
     } catch (erro) {
       res
         .status(500)
@@ -66,4 +67,4 @@ class LivroController {
 
 
   };
-export default LivroController;
+export default AutorController;
