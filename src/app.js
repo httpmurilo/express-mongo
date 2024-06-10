@@ -1,11 +1,9 @@
 import express from "express";
 import conectaNaDataBase from "./config/dbConnect.js";
-import livro from "./model/Livro.js"
+import routes from "./routes/index.js";
 
 const app = express();
-
-const conexao = await conectaNaDataBase();
-
+routes(app);
 
 conexao.on("error", (error) => {
     console.error("erro de conexão", error);
@@ -15,22 +13,15 @@ conexao.once("open", () => {
     console.log("Conexão com o banco de dados feita com sucesso");
 });
 
-app.use(express.json());
+//app.get("/livros", async (req, res) => {
+//    const listaLivros = await livro.find({});
+//    res.status(200).json(listaLivros);
+//} );
 
-
-app.get("/", (req, res) => {
-    res.status(200, send("Curso"));
-} );
-
-app.get("/livros", async (req, res) => {
-    const listaLivros = await livro.find({});
-    res.status(200).json(listaLivros);
-} );
-
-app.post("/livros", (req, res) => {
-    livros.push(req.body);
-    res.status(201).send("livro cadastrado com sucesso");
-});
+//app.post("/livros", (req, res) => {
+//    livros.push(req.body);
+//    res.status(201).send("livro cadastrado com sucesso");
+//});
 
 app.get("/livros/:id", (req, res) => {
     
